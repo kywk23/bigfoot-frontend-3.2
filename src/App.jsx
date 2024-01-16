@@ -1,31 +1,41 @@
-import logo from "/logo.png";
 import "./App.css";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import Sightings from "./Components/Sightings";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import SightingDetails from "./Components/SightingsDetails";
 
 function App() {
-  const [sightings, setSightings] = useState();
-
-  const handleGetSightings = async () => {
-    try {
-      const response = await axios.get("http://localhost:3000/sightings");
-      setSightings(response.data[0]);
-      console.log(sightings);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  useEffect(() => {}, [sightings]);
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <div>
+          <h1> SEE BIGFOOT </h1>
+          <p>Placeholder for main page</p>
+          <Sightings />
+        </div>
+      ),
+    },
+    {
+      path: "/sightings",
+      element: (
+        <div>
+          <h2>Click again to load</h2>
+          <p>Placeholder for second page</p>
+          <Sightings />
+        </div>
+      ),
+    },
+    {
+      path: "/sightings/:id",
+      element: <SightingDetails />,
+    },
+  ]);
 
   return (
     <>
       <div>
-        <img src={logo} className="logo react" alt="React logo" />
+        <RouterProvider router={router} />
       </div>
-      <h1>Bigfoot Frontend </h1>
-
-      <button onClick={handleGetSightings}>Get Sightings</button>
     </>
   );
 }

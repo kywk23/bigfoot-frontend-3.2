@@ -1,7 +1,8 @@
 import "./App.css";
 import Sightings from "./Components/Sightings";
+import SightingDetails from "./Components/SightingDetails"; /
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import SightingDetails from "./Components/SightingsDetails";
 
 function App() {
   const router = createBrowserRouter([
@@ -15,18 +16,9 @@ function App() {
         </div>
       ),
     },
+
     {
-      path: "/sightings",
-      element: (
-        <div>
-          <h2>Click again to load</h2>
-          <p>Placeholder for second page</p>
-          <Sightings />
-        </div>
-      ),
-    },
-    {
-      path: "/sightings/:id",
+      path: "/:id",
       element: <SightingDetails />,
     },
   ]);

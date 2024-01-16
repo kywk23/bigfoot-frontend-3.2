@@ -1,17 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { BACKEND_URL } from "../constants.jsx";
 
 export default function Sightings() {
   // States
   const [sightings, setSightings] = useState([]);
-  const navigate = useNavigate();
-  const [selectedSightingIndex, setSelectedSightingIndex] = useState(null);
 
   const handleGetSightingsList = async () => {
     try {
-      navigate("/sightings");
       const response = await axios.get(`${BACKEND_URL}/sightings`);
       setSightings(response.data);
     } catch (error) {
@@ -23,26 +20,22 @@ export default function Sightings() {
     console.log(sightings);
   }, [sightings]);
 
-  const handleSightingClick = (index) => {
-    setSelectedSightingIndex(index);
-  };
-
   return (
     <div>
-      <button onClick={handleGetSightingsList}>Click here to see list of bigfoot</button>
-      {sightings && sightings.length > 0
-        ? sightings.map((sighting, index) => (
-            <div key={index} onClick={() => handleSightingClick(index)}>
-              <Link to={`/sightings/${sighting.id}`}>
-                <div className="card">
-                  <h2>
-                    {sighting.YEAR}, {sighting.SEASON}, {sighting.MONTH}
-                  </h2>
-                </div>
-              </Link>
-            </div>
-          ))
-        : null}
+      <button onClick={handleGetSightingsList}>Big Foot Sightings - Click here.</button>
+      {sightings && sightings.length > 0 ? (
+        sightings.map((sighting, index) => (
+          <div key={sighting.id} className="card">
+            <Link to={`${BACKEND_URL}/sightings/${index}`}>
+              <h2>
+                {sighting.YEAR}, {sighting.SEASON}, {sighting.MONTH}
+              </h2>
+            </Link>
+          </div>
+        ))
+      ) : (
+        <p>No sightings available</p>
+      )}
     </div>
   );
 }

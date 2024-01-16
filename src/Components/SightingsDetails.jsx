@@ -1,37 +1,27 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { BACKEND_URL } from "../constants.jsx";
+import { useParams } from "react-router-dom";
 
-export default function SightingDetails({ selectedSightingIndex }) {
-  const [sighting, setSighting] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${BACKEND_URL}/sightings/${selectedSightingIndex}`);
-        setSighting(response.data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, [selectedSightingIndex]);
-
-  console.log(`sighting:`, sighting);
+const SightingDetails = ({ sightings }) => {
+  const { index } = useParams(); // Using "index" in the URL
+  const sightingIndex = parseInt(index, 10);
+  const sighting = sightings[sightingIndex];
 
   return (
     <div>
-      <h1>Sighting Details</h1>
+      <h1>Sighting Details:</h1>
       {sighting ? (
-        <div className="card">
+        <div>
           <h2>
             {sighting.YEAR}, {sighting.SEASON}, {sighting.MONTH}
           </h2>
+          <p>{sighting.DATE}</p>
+          <p>{sighting.LOCATION_DETAILS}</p>
+          <p>{sighting.OBSERVED}</p>
         </div>
       ) : (
-        <p>Loading...</p>
+        <p>Sighting not found</p>
       )}
     </div>
   );
-}
+};
+
+export default SightingDetails;

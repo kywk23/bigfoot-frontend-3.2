@@ -26,7 +26,7 @@ export default function Sightings() {
       {sightings && sightings.length > 0 ? (
         sightings.map((sighting, index) => (
           <div key={sighting.id} className="card">
-            <Link to={`${BACKEND_URL}/sightings/${index}`}>
+            <Link to={`${index}`}>
               <h2>
                 {sighting.YEAR}, {sighting.SEASON}, {sighting.MONTH}
               </h2>

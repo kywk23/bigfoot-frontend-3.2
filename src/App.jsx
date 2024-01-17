@@ -1,6 +1,6 @@
 import "./App.css";
 import Sightings from "./Components/Sightings";
-import SightingDetails from "./Components/SightingDetails"; /
+import SightingDetails from "./Components/SightingsDetails";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -18,7 +18,7 @@ function App() {
     },
 
     {
-      path: "/:id",
+      path: "/:index",
       element: <SightingDetails />,
     },
   ]);

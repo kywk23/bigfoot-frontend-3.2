@@ -17,7 +17,6 @@ export default function SightingsForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(sightings);
-
     let response = await axios.post(`${BACKEND_URL}/sightings`, sightings);
     setSightings({
       date: "",

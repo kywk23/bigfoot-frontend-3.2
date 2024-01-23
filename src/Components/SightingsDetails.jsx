@@ -31,18 +31,16 @@ const SightingDetails = () => {
       <h1>Sighting Details:</h1>
       {sighting ? (
         <div>
-          <h2>
-            {sighting.YEAR}, {sighting.SEASON}
-          </h2>
           <p>
-            <strong>Date: </strong> {sighting.DATE} {sighting.MONTH}
+            <strong>Date: </strong> {sighting.date}
           </p>
           <p>
-            <strong>Location: </strong> {sighting.LOCATION_DETAILS}
+            <strong>Location: </strong> {sighting.location}
+          </p>
+          <p>
+            <strong>Notes: </strong> {sighting.notes}
           </p>
           <br />
-          <h3>The Observation: </h3>
-          <p>{sighting.OBSERVED}</p>
         </div>
       ) : (
         <p>Sighting not found</p>

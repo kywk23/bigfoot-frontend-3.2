@@ -2,7 +2,8 @@ import "./App.css";
 import Sightings from "./Components/Sightings";
 import SightingDetails from "./Components/SightingsDetails";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
+import SightingsForm from "./Components/SightingsForm";
 
 function App() {
   const router = createBrowserRouter([
@@ -11,7 +12,6 @@ function App() {
       element: (
         <div>
           <h1> SEE BIGFOOT </h1>
-          <p>Placeholder for main page</p>
           <Sightings />
         </div>
       ),
@@ -20,6 +20,10 @@ function App() {
     {
       path: "/:index",
       element: <SightingDetails />,
+    },
+    {
+      path: "/sightingsform",
+      element: <SightingsForm />,
     },
   ]);
 

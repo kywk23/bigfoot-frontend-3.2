@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../constants.jsx";
 import { useParams } from "react-router-dom";
 
@@ -8,7 +8,7 @@ export default function Sightings() {
   // States
   const [sightings, setSightings] = useState([]);
   const { index } = useParams();
-
+  const navigate = useNavigate();
   const handleGetSightingsList = async () => {
     try {
       let response = await axios.get(`${BACKEND_URL}/sightings`);
@@ -27,6 +27,10 @@ export default function Sightings() {
     }
   };
 
+  const navigateToEditSighting = (index) => {
+    navigate(`${index}/sightingseditform`);
+  };
+
   useEffect(() => {
     console.log(sightings);
   }, [sightings]);
@@ -42,6 +46,7 @@ export default function Sightings() {
                 {sighting.location} - {new Date(sighting.date).toLocaleDateString()}
               </h2>
             </Link>
+            <button onClick={() => navigateToEditSighting(sighting.id)}>Edit</button>
             <button onClick={() => deleteSighting(sighting.id)}>Delete</button>
           </div>
         ))

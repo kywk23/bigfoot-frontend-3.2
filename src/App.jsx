@@ -4,6 +4,7 @@ import SightingDetails from "./Components/SightingsDetails";
 
 import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
 import SightingsForm from "./Components/SightingsForm";
+import SightingsEditForm from "./Components/SightingsEditForm";
 
 function App() {
   const router = createBrowserRouter([
@@ -24,6 +25,10 @@ function App() {
     {
       path: "/sightingsform",
       element: <SightingsForm />,
+    },
+    {
+      path: "/:index/sightingseditform",
+      element: <SightingsEditForm />,
     },
   ]);
 

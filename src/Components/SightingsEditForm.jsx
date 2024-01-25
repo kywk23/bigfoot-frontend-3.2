@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BACKEND_URL } from "../constants.jsx";
 import { Link, useParams } from "react-router-dom";
 

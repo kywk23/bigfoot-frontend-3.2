@@ -37,6 +37,9 @@ export default function Sightings() {
 
   return (
     <div>
+      <Link to="/sightingsform">Add a sighting here</Link>
+      <br />
+      <br />
       <button onClick={handleGetSightingsList}>Big Foot Sightings - Click here.</button>
       {sightings && sightings.length > 0 ? (
         sightings.map((sighting) => (
@@ -53,7 +56,6 @@ export default function Sightings() {
       ) : (
         <p></p>
       )}
-      <Link to="/sightingsform">Add a sighting here</Link>
     </div>
   );
 }

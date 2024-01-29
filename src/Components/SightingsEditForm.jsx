@@ -20,10 +20,15 @@ export default function SightingsEditForm() {
     console.log(sightings);
     try {
       const response = await axios.put(`${BACKEND_URL}/sightings/${index}`, sightings);
+      alert(`edit done!`);
       console.log(response.data);
     } catch (error) {
       console.log(`error editing msg:`, error);
     }
+    setSightings({
+      location: "",
+      notes: "",
+    });
   };
 
   return (

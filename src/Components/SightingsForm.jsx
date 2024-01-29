@@ -11,20 +11,42 @@ export default function SightingsForm() {
     notes: "",
   });
   const [categoriesOptions, setCategoriesOptions] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState([]);
 
   //Sightings section
   const handleChange = (event) => {
+    // const selectedCategoryId = selectedCategory.map(({ value }) => value);
+    // console.log(`selectedCategoryId`, selectedCategoryId);
+    // setSightings({
+    //   ...sightings,
+    //   selectedCategoryId,
+    // });
+
     setSightings({ ...sightings, [event.target.name]: event.target.value });
   };
+
+  useEffect(() => {
+    console.log(`selectedCategory`, selectedCategory);
+    console.log(`sightins`, sightings);
+  }, [selectedCategory, sightings]);
+
   const handleSubmit = async (event) => {
+    console.log(`sightins`, sightings);
     event.preventDefault();
-    console.log(sightings);
-    let response = await axios.post(`${BACKEND_URL}/sightings`, sightings);
+    const selectedCategoryId = selectedCategory.map(({ id }) => id);
+    console.log(`selectedCategory`, selectedCategory);
+    console.log(`sightings`, sightings);
+    console.log(`selectedCategoryId`, selectedCategoryId);
+    let response = await axios.post(`${BACKEND_URL}/sightings`, {
+      ...sightings,
+      selectedCategoryId,
+    });
+    console.log(response.data);
     setSightings({
       date: "",
       location: "",
       notes: "",
+      selectedCategoryId: [],
     });
   };
 
@@ -35,17 +57,13 @@ export default function SightingsForm() {
       color: "black",
     }),
   };
-  useEffect(() => {
-    console.log(`cat options:`, categoriesOptions);
-    console.log(`selected cat:`, selectedCategory);
-  }, [categoriesOptions, selectedCategory]);
 
   useEffect(() => {
     const getCategoryData = async () => {
       try {
         const res = await axios.get(`${BACKEND_URL}/categories`);
-        console.log(res.data);
         const categoryNames = res.data.map((category) => ({
+          id: category.id,
           label: category.name,
           value: category.name,
         }));

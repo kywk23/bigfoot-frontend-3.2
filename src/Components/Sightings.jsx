@@ -32,7 +32,7 @@ export default function Sightings() {
   };
 
   useEffect(() => {
-    console.log(sightings);
+    console.log(`sightings`, sightings);
   }, [sightings]);
 
   return (

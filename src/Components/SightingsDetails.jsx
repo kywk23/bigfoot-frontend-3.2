@@ -5,13 +5,9 @@ import axios from "axios";
 
 const SightingDetails = () => {
   const { index } = useParams();
-  const [sighting, setSightings] = useState([]);
+  const [sighting, setSightings] = useState("");
   const [comment, setComment] = useState("");
   const [commentList, setCommentList] = useState([]);
-
-  useEffect(() => {
-    console.log(`index is`, index);
-  }, []);
 
   // // const sightingIndex = parseInt(index, 10);
   // const sighting = sightings[Number(index)];
@@ -44,8 +40,10 @@ const SightingDetails = () => {
   }, [index]);
 
   useEffect(() => {
+    console.log(`index is`, index);
     console.log(commentList);
-  }, [commentList]);
+    console.log(`sightings`, sighting);
+  }, [commentList, sighting]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -71,6 +69,12 @@ const SightingDetails = () => {
         <div>
           <p>
             <strong>Date: </strong> {sighting.date}
+          </p>
+          <p>
+            <strong>Categories: </strong>
+            {sighting.categories.map((category) => (
+              <li key={category.id}> {category.name} </li>
+            ))}
           </p>
           <p>
             <strong>Location: </strong> {sighting.location}
